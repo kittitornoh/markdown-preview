@@ -17,3 +17,7 @@ You will also see any lint errors in the console.
 This project also uses the following package(s):
 
 - https://github.com/markedjs/marked
+
+---
+
+This is coding challenge 4 of 5 from [Sean Groff's Medium article](https://medium.com/@sgroff04/how-i-learned-react-and-how-you-can-too-6714a48e984a)

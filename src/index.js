@@ -6,6 +6,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    // primary source of text
     this.state = {
       mainText: props.example
     };
@@ -27,25 +28,42 @@ class App extends React.Component {
     );
   }
 }
+
+/*
+ * The area of text the user can edit.
+ */
 class TextEdit extends React.Component {
   constructor(props) {
     super(props);
 
+    // text source for editable area
     this.state = {
       textEdit: this.props.text
     };
   }
 
+  /*
+   * Set a minHeight value of 720px, as well as dynamically set the textarea height
+   * to the scroll height.
+   */
   updateHeight() {
     var target = document.getElementById("textEdit");
-    target.style.height = "720px";
+    target.style.height = "720px"; // minHeight
     target.style.height = target.scrollHeight + "px";
   }
 
+  /*
+   * Set the textarea height to the height of the example text.
+   */
   componentDidMount() {
     this.updateHeight();
   }
 
+  /*
+   * Update this component's state, as well as update the parent state accordingly.
+   * Afterwards, update the height of the textarea.
+   * @param e   the event
+   */
   updateTextHandler(e) {
     const newText = e.target.value;
     this.setState({ textEdit: newText });
@@ -75,15 +93,28 @@ class TextEdit extends React.Component {
   }
 }
 
+/*
+ * The area of text that renders the markdown text from the user input.
+ */
 class TextPreview extends React.Component {
+  /*
+   * Update the HTML of the rendered preview.
+   * @param t   HTML to update to
+   */
   updateText(t) {
     document.getElementById("markedText").innerHTML = t;
   }
 
+  /*
+   * Initial update of the example HTML.
+   */
   componentDidMount() {
     this.updateText(marked(this.props.text));
   }
 
+  /*
+   * Update the HTML dynamically as the user types.
+   */
   componentDidUpdate() {
     this.updateText(marked(this.props.text));
   }
@@ -103,6 +134,7 @@ class TextPreview extends React.Component {
   }
 }
 
+// example text to render initially
 const EXAMPLE = [
   "# hello, This is Markdown Live Preview",
   "",
